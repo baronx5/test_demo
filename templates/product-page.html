@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>fullwidth-updated-1-1</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="../static/assets/css/Simple-Slider.css">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+
+
+	<link rel="stylesheet" href="../static/assets/css/css/style.css"> <!-- Gem style -->
+	<script src="../static/assets/css/css/js/modernizr.js"></script> <!-- Modernizr -->
+
+
+</head>
+
+<body style="background-color: rgb(245,245,245);">
+
+
+    <nav class="navbar navbar-light navbar-expand-md" style="background-color: #ffffff;">
+        <div class="container-fluid"><a class="navbar-brand" href="#" style="font-family: Cairo, sans-serif;">ع</a><button id="cd-cart-trigger" data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#">First Item</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Second Item</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Third Item</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <form action="/check_order" method="post">
+    <div class="container main-bg" style="max-width: 100%;">
+        <div class="row">
+            <div class="col-md-5" style="padding: 0px;">
+                <div class="div-product-img" style="/*height: 430px;*/border-bottom: 1px solid #eee;"><img class="img-fluid" src="../static/assets/img/{{ product_name.img }}">
+                    <div style="padding: 10px;background-color: #ffffff;">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-3">
+                                <p>{{ product_name.price }} KWD</p>
+                            </div>
+                            <div class="col-9 col-xl-9">
+                                <h4 class="text-right" style="font-size: 16px;font-family: Cairo, sans-serif;">{{ product_name.name }}<br></h4>
+                                <p class="text-right" style="font-family: Cairo, sans-serif;font-size: 14px;color: rgb(155,158,160);">{{ product_name.description }}<br></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if addons_main %}
+                <div class="div-options" style="padding: 10px;margin: 5px 0px 5px 0px;background-color: #ffffff;border-top: 1px solid #eee;border-bottom: 1px solid #eee;">
+                    <div class="row" style="margin: 0px;">
+                        <div class="col-12 text-right">
+                            <p style="color: rgb(166,166,166);font-family: Cairo, sans-serif;">الاضافات الاجبارية</p>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around" style="margin: 0px;">
+                        {% for addons in addons_main %}
+                        <div class="col-3 col-md-3 text-left">
+                            <p class="text-left" style="font-size: 12px;">{{ addons.price }}<br></p>
+                        </div>
+                        <div class="col-7 col-md-7 col-xl-7 text-right d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill justify-content-end align-items-stretch" style="padding: 0px;">
+                            <p style="font-size: 13px;color: rgb(155,158,160);font-family: Cairo, sans-serif;">{{ addons.name }}<br></p>
+                        </div>
+                        <div class="col-1 col-xl-1 text-right"><input name="addons_id" value="{{ addons.id }}" type="checkbox"></div>
+                        {% endfor %}
+                    </div>
+                </div> {% endif %}
+                 {% if addons_optional %}
+                <div class="div-options" style="padding: 10px;margin: 5px 0px 5px 0px;background-color: #ffffff;border-top: 1px solid #eee;border-bottom: 1px solid #eee;">
+                    <div class="row" style="margin: 0px;">
+                        <div class="col-12 text-right">
+                            <p style="color: rgb(166,166,166);font-family: Cairo, sans-serif;">الاضافات الاختيارية</p>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around" style="margin: 0px;">
+                        {% for addons in addons_optional %}
+                        <div class="col-3 col-md-3 text-left">
+                            <p class="text-left" style="font-size: 12px;">{{ addons.price }}<br></p>
+                        </div>
+                        <div class="col-7 col-md-7 col-xl-7 text-right d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill justify-content-end align-items-stretch" style="padding: 0px;">
+                            <p style="font-size: 13px;color: rgb(155,158,160);font-family: Cairo, sans-serif;">{{ addons.name }}<br></p>
+                        </div>
+                        <div class="col-1 col-xl-1 text-right"><input name="addons_id" value="{{ addons.id }}" type="checkbox"></div>
+                        {% endfor %}
+                    </div>
+                </div>{% endif %}
+
+                <div class="div-options" style="padding: 10px;margin: 5px 0px 5px 0px;background-color: #ffffff;border-top: 1px solid #eee;border-bottom: 1px solid #eee;">
+                    <div class="row" style="margin: 0px;">
+                        <div class="col-12 text-right">
+                            <p style="color: rgb(166,166,166);font-family: Cairo, sans-serif;">الكمية</p><input type="number" value="0" min="0" max="100" step="1"/></div>
+                    </div>
+                </div>
+                <input type="hidden" name="product_id" value="{{ product_name.name }}"/>
+                <button class="btn btn-outline-link btn-block" id="add-to-cart-button" type="submit" style="background-color: #eb4242;color: rgb(255,255,255);font-family: Cairo, sans-serif;">أضف إلى مشترياتي</button></div>
+            <div class="col-md-7 d-md-flex d-xl-flex justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center d-none d-md-block"
+                style="background-color: #d64747;height: 100vh;background-image: url(../static/assets/img/1.jpg);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                <div>
+                    <p class="text-center"><img data-aos="zoom-in" src="../static/assets/img/1.jpg" width="150px"></p>
+                    <h4 class="text-center" style="color: rgb(255,255,255);font-family: Aldrich, sans-serif;">THE HUG COFFE SHOP</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/assets/js/jquery.min.js"></script>
+    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/assets/js/bootstrap-input-spinner.js"></script>
+    <script src="../static/assets/js/bs-animation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <script src="../static/assets/js/quantity-value.js"></script>
+    <script src="../static/assets/js/Simple-Slider.js"></script>
+</form>
+	<div id="cd-shadow-layer"></div>
+
+	<div id="cd-cart">
+		<h2>Cart</h2>
+		<ul class="cd-cart-items">
+			<li>
+				<span class="cd-qty">1x</span> Product Name
+				<div class="cd-price">$9.99</div>
+				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
+			</li>
+
+			<li>
+				<span class="cd-qty">2x</span> Product Name
+				<div class="cd-price">$19.98</div>
+				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
+			</li>
+
+			<li>
+				<span class="cd-qty">1x</span> Product Name
+				<div class="cd-price">$9.99</div>
+				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
+			</li>
+		</ul> <!-- cd-cart-items -->
+
+		<div class="cd-cart-total">
+			<p>Total <span>$39.96</span></p>
+		</div> <!-- cd-cart-total -->
+
+		<a href="#0" class="checkout-btn">Checkout</a>
+
+		<p class="cd-go-to-cart"><a href="#0">Go to cart page</a></p>
+	</div> <!-- cd-cart -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="../static/assets/css/css/js/main.js"></script> <!-- Gem jQuery -->
+</body>
+
+</html>
