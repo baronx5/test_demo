@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../static/assets/css/Simple-Slider.css">
     <link rel="stylesheet" href="../static/assets/css/styles.css">
 
+    <!-- In <head> after the Bootstrap CSS. -->
+    <link rel="stylesheet" href="../static/assets/css/bootstrap-better-nav.min.css">
 
-	<link rel="stylesheet" href="../static/assets/css/css/style.css"> <!-- Gem style -->
-	<script src="../static/assets/css/css/js/modernizr.js"></script> <!-- Modernizr -->
 
 
 </head>
@@ -22,18 +22,44 @@
 <body style="background-color: rgb(245,245,245);">
 
 
-    <nav class="navbar navbar-light navbar-expand-md" style="background-color: #ffffff;">
-        <div class="container-fluid"><a class="navbar-brand" href="#" style="font-family: Cairo, sans-serif;">ع</a><button id="cd-cart-trigger" data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#">First Item</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Second Item</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Third Item</a></li>
-                </ul>
+    <nav class="navbar navbar-light navbar-expand-md better-bootstrap-nav-right" style="background-color: #ffffff;">
+        <div class="container-fluid"><a class="navbar-brand" href="#" style="font-family: Cairo, sans-serif;">ع</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                    <div id="cd-cart">
+                        <h2>Cart</h2>
+                        <ul class="cd-cart-items">
+                            <li>
+                                <span class="cd-qty">1x</span> Product Name
+                                <div class="cd-price">$9.99</div>
+                                <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
+                            </li>
+
+                            <li>
+                                <span class="cd-qty">2x</span> Product Name
+                                <div class="cd-price">$19.98</div>
+                                <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
+                            </li>
+
+                            <li>
+                                <span class="cd-qty">1x</span> Product Name
+                                <div class="cd-price">$9.99</div>
+                                <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
+                            </li>
+                        </ul> <!-- cd-cart-items -->
+
+                        <div class="cd-cart-total">
+                            <p>Total <span>$39.96</span></p>
+                        </div> <!-- cd-cart-total -->
+
+                        <a href="#0" class="checkout-btn">Checkout</a>
+
+                        <p class="cd-go-to-cart"><a href="#0">Go to cart page</a></p>
+                    </div>
         </div>
         </div>
     </nav>
+
+
     <form action="/check_order" method="post">
     <div class="container main-bg" style="max-width: 100%;">
         <div class="row">
@@ -117,41 +143,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
     <script src="../static/assets/js/quantity-value.js"></script>
     <script src="../static/assets/js/Simple-Slider.js"></script>
+            <!-- At the end of <body>, after jQuery and the Bootstrap js -->
+    <script src="../static/assets/js/bootstrap-better-nav.min.js"></script>
 </form>
-	<div id="cd-shadow-layer"></div>
 
-	<div id="cd-cart">
-		<h2>Cart</h2>
-		<ul class="cd-cart-items">
-			<li>
-				<span class="cd-qty">1x</span> Product Name
-				<div class="cd-price">$9.99</div>
-				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
-			</li>
-
-			<li>
-				<span class="cd-qty">2x</span> Product Name
-				<div class="cd-price">$19.98</div>
-				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
-			</li>
-
-			<li>
-				<span class="cd-qty">1x</span> Product Name
-				<div class="cd-price">$9.99</div>
-				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
-			</li>
-		</ul> <!-- cd-cart-items -->
-
-		<div class="cd-cart-total">
-			<p>Total <span>$39.96</span></p>
-		</div> <!-- cd-cart-total -->
-
-		<a href="#0" class="checkout-btn">Checkout</a>
-
-		<p class="cd-go-to-cart"><a href="#0">Go to cart page</a></p>
-	</div> <!-- cd-cart -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="../static/assets/css/css/js/main.js"></script> <!-- Gem jQuery -->
 </body>
 
 </html>
