@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 dbconn = pymysql.connect(host='localhost', user='root', password='', db='coffee_shop', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
 
-
-
+#comment
 
 
 @app.route('/')
