@@ -59,10 +59,10 @@ def product_page(id):
 def check_order_session():
 
     if request.method == "POST":
-        orders = request.form["product_id"]
+        product_name = request.form["product_id"]
+        addons_id = request.form["addons_id"]
         quantity = request.form["quantity"]
-        orders_addons = request.form.getlist("addons_id")
-        print(orders,orders_addons,quantity)
+        print(product_name,addons_id,quantity)
     return "x"
 
 
@@ -73,7 +73,7 @@ def payment():
         check = request.form.getlist('vehicles')
         print(check[0])
 
-    return render_template('test.html')
+    return
 
 
 if __name__ == '__main__':
