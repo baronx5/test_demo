@@ -5,8 +5,6 @@ app = Flask(__name__)
 
 dbconn = pymysql.connect(host='localhost', user='root', password='', db='coffee_shop', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
 
-#comment
-
 
 @app.route('/')
 def hello_world():
@@ -32,7 +30,6 @@ def hello_world():
                            results_products = results_products,
                            results_products_by_category = results_products_by_category,
                            results_logo = results_logo)
-
 
 
 @app.route('/products/<string:id>')
@@ -61,6 +58,17 @@ def check_order_session():
         orders_addons = request.form.getlist("addons_id")
         print(orders,orders_addons)
     return "x"
+
+
+@app.route('/payment', methods=['post','get'])
+def payment():
+
+    if request.method == 'POST':
+        check = request.form.getlist('vehicles')
+        print(check)
+
+    return render_template('test.html')
+
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
