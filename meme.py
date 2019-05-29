@@ -47,7 +47,12 @@ def product_page(id):
         sql = "SELECT * FROM addons where product_id = %s AND optional LIKE 2"
         cursor.execute(sql,id)
         addons_optional = cursor.fetchall()
-    return render_template("product-page.html", product_name = results_products ,addons_main = addons_main, addons_optional = addons_optional)
+
+        sql = "SELECT * FROM settings"
+        cursor.execute(sql)
+        results_logo = cursor.fetchone()
+
+    return render_template("product-page.html", product_name = results_products ,addons_main = addons_main, addons_optional = addons_optional,results_logo = results_logo)
 
 
 @app.route('/check_order',methods=["post"])
@@ -55,17 +60,18 @@ def check_order_session():
 
     if request.method == "POST":
         orders = request.form["product_id"]
+        quantity = request.form["quantity"]
         orders_addons = request.form.getlist("addons_id")
-        print(orders,orders_addons)
+        print(orders,orders_addons,quantity)
     return "x"
 
 
 @app.route('/payment', methods=['post','get'])
 def payment():
 
-    if request.method == 'POST':
+    if request.method == 'post':
         check = request.form.getlist('vehicles')
-        print(check)
+        print(check[0])
 
     return render_template('test.html')
 

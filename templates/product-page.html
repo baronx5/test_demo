@@ -69,7 +69,7 @@
                     <div class="row justify-content-around" style="margin: 0px;">
                         {% for addons in addons_main %}
                         <div class="col-3 col-md-3 text-left">
-                            <p class="text-left" style="font-size: 12px;">{{ addons.price }}<br></p>
+                            <p class="text-left" style="font-size: 12px;">{{ addons.price }} KWD<br></p>
                         </div>
                         <div class="col-7 col-md-7 col-xl-7 text-right d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill justify-content-end align-items-stretch" style="padding: 0px;">
                             <p style="font-size: 13px;color: rgb(155,158,160);font-family: Cairo, sans-serif;">{{ addons.name }}<br></p>
@@ -88,7 +88,7 @@
                     <div class="row justify-content-around" style="margin: 0px;">
                         {% for addons in addons_optional %}
                         <div class="col-3 col-md-3 text-left">
-                            <p class="text-left" style="font-size: 12px;">{{ addons.price }}<br></p>
+                            <p class="text-left" style="font-size: 12px;">{{ addons.price }} KWD<br></p>
                         </div>
                         <div class="col-7 col-md-7 col-xl-7 text-right d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill justify-content-end align-items-stretch" style="padding: 0px;">
                             <p style="font-size: 13px;color: rgb(155,158,160);font-family: Cairo, sans-serif;">{{ addons.name }}<br></p>
@@ -101,7 +101,7 @@
                 <div class="div-options" style="padding: 10px;margin: 5px 0px 5px 0px;background-color: #ffffff;border-top: 1px solid #eee;border-bottom: 1px solid #eee;">
                     <div class="row" style="margin: 0px;">
                         <div class="col-12 text-right">
-                            <p style="color: rgb(166,166,166);font-family: Cairo, sans-serif;">الكمية</p><input type="number" value="0" min="0" max="100" step="1"/></div>
+                            <p style="color: rgb(166,166,166);font-family: Cairo, sans-serif;">الكمية</p><input name="quantity" type="number" value="0" min="0" max="100" step="1"/></div>
                     </div>
                 </div>
                 <input type="hidden" name="product_id" value="{{ product_name.name }}"/>
@@ -109,8 +109,8 @@
             <div class="col-md-7 d-md-flex d-xl-flex justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center d-none d-md-block"
                 style="background-color: #d64747;height: 100vh;background-image: url(../static/assets/img/1.jpg);background-position: center;background-size: cover;background-repeat: no-repeat;">
                 <div>
-                    <p class="text-center"><img data-aos="zoom-in" src="../static/assets/img/1.jpg" width="150px"></p>
-                    <h4 class="text-center" style="color: rgb(255,255,255);font-family: Aldrich, sans-serif;">THE HUG COFFE SHOP</h4>
+                    <p class="text-center"><img data-aos="zoom-in" src="../static/assets/img/{{ results_logo['logo'] }}" width="150px"></p>
+                    <h4 class="text-center" style="color: rgb(255,255,255);font-family: Aldrich, sans-serif;">{{ results_logo['site_title'] }}</h4>
                 </div>
             </div>
         </div>

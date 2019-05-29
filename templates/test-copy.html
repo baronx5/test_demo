@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+<body>
+<form action="/payment" method="get">
+  <h2>How do you commute to work:</h2>
+  <label><input type="checkbox" name="vehicles" value="Bike"> Bike </label><br />
+  <label><input type="checkbox" name="vehicles" value="Car"> Car </label><br />
+  <label><input type="checkbox" name="vehicles" value="Train"> Train </label><br />
+  <label><input type="checkbox" name="vehicles" value="Bus"> Bus </label><br />
+  <input type="submit" value="Submit">
+</form>
+<script>
+(function($) {
+
+  "use_strict";
+
+  // This array will store the values of the "checked" vehicle checkboxes
+  var cboxArray = [];
+
+  // Check if the vehicle value has already been added to the array and if not - add it
+  function itemExistsChecker(cboxValue) {
+
+    var len = cboxArray.length;
+
+    if (len > 0) {
+      for (var i = 0; i < len; i++) {
+        if (cboxArray[i] == cboxValue) {
+          return true;
+        }
+      }
+    }
+
+    cboxArray.push(cboxValue);
+  }
+
+  $('input[type="checkbox"]').each(function() {
+
+    var cboxValue = $(this).val();
+    var cboxChecked = localStorage.getItem(cboxValue) == 'true' ? true : false;
+
+    // On page load check if any of the checkboxes has previously been selected and mark it as "checked"
+    if (cboxChecked) {
+
+      $(this).prop('checked', true);
+      itemExistsChecker(cboxValue);
+
+    }
+
+    // On checkbox change add/remove the vehicle value from the array based on the choice
+    $(this).change(function() {
+
+      localStorage.setItem(cboxValue, $(this).is(':checked'));
+
+      if ($(this).is(':checked')) {
+
+        itemExistsChecker(cboxValue);
+
+      } else {
+
+        // Delete the vehicle value from the array if its checkbox is unchecked
+        var cboxValueIndex = cboxArray.indexOf(cboxValue);
+
+        if (cboxValueIndex >= 0) {
+          cboxArray.splice( cboxValueIndex, 1 );
+        }
+
+      }
+
+      console.log(cboxArray);
+
+    });
+
+  });
+
+  console.log(cboxArray);
+
+})(jQuery);
+</script>
+</body>
+</html>
