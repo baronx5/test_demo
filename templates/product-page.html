@@ -27,12 +27,8 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <h2>Cart</h2>
-                    <li class="nav-item" role="presentation">
-                    <div class="row d-flex align-items-center" style="border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding-top:10px;padding-bottom:10px;">
-                        <div class="col-10"><span class="d-block">مشروب ساخن جميل جدا</span></div>
-                        <div class="col-2"><span class="badge badge-primary badge-pill">2</span></div>
+                    <div id="ajax_resp">
                     </div>
-                    </li>
                 </ul>
 
         </div>
@@ -126,34 +122,30 @@
             <!-- At the end of <body>, after jQuery and the Bootstrap js -->
     <script src="../static/assets/js/bootstrap-better-nav.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#add_to_cart').on('submit', function(event) {
+    $(document).ready(function() {
+        $('#add_to_cart').on('submit', function(event) {
 
-                var checked = []
-                $("input[name='addons_id']:checked").each(function ()
-                {
-                    checked.push($(this).val());
+                    var myCheckboxes = new Array();
+                        $("input:checked").each(function() {
+                           myCheckboxes.push($(this).val());
+                        });
+
+                    $.ajax({
+                        data : {
+                            product_name : $('#product_id').val(),
+                            addons_id : JSON.stringify(myCheckboxes),
+                            quantity : $('#quantity').val()
+                        },
+                        type : 'POST',
+                        url : '{{ url_for('check_order_session') }}'
+                    })
+                    .done(function(resp) {
+                           $('#ajax_resp').html(resp);
+                    });
+
+                    event.preventDefault();
                 });
-
-
-                $.ajax({
-                                type : 'POST',
-                                url : '/check_order',
-                                data : {
-                                    product_name : $('{{ product_name.name }}').val(),
-                                    addons_id : checked,
-                                    quantity : $('#quantity').val(),
-                                 },
-                            })
-                            .done(function(resp) {
-                                   $('#vacationsList').html(resp);
-                            });
-
-                            event.preventDefault();
-                 });
-              });
-         });
-
+              })
     </script>
 
 

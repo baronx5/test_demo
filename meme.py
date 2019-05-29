@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for,jsonify
 import pymysql.cursors
 app = Flask(__name__)
 
@@ -59,11 +59,11 @@ def product_page(id):
 def check_order_session():
 
     if request.method == "POST":
-        product_name = request.form["product_id"]
+        product_name = request.form["product_name"]
         addons_id = request.form["addons_id"]
         quantity = request.form["quantity"]
-        print(product_name,addons_id,quantity)
-    return "x"
+
+        return render_template('/ajax_files/cart_items.html', product_name=product_name, addons_id=addons_id, quantity=quantity)
 
 
 @app.route('/payment', methods=['post','get'])
