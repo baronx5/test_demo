@@ -1,85 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!DOCTYPE html>
+
+    <html lang="en">
+
+    <head>
+
+    <meta charset="utf-8">
+
+    <title>jQuery Get Values of Selected Checboxes</title>
+
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-</head>
-<body>
-<form action="/payment" method="post">
-  <h2>How do you commute to work:</h2>
-  <label><input type="checkbox" name="vehicles" value="Bike"> Bike </label><br />
-  <label><input type="checkbox" name="vehicles" value="Car"> Car </label><br />
-  <label><input type="checkbox" name="vehicles" value="Train"> Train </label><br />
-  <label><input type="checkbox" name="vehicles" value="Bus"> Bus </label><br />
-  <input type="submit" value="Submit">
-</form>
-<script>
-(function($) {
 
-  "use_strict";
+    <script type="text/javascript">
 
-  // This array will store the values of the "checked" vehicle checkboxes
-  var cboxArray = [];
+        $(document).ready(function() {
 
-  // Check if the vehicle value has already been added to the array and if not - add it
-  function itemExistsChecker(cboxValue) {
+            $("button").click(function(){
 
-    var len = cboxArray.length;
+                var favorite = [];
 
-    if (len > 0) {
-      for (var i = 0; i < len; i++) {
-        if (cboxArray[i] == cboxValue) {
-          return true;
-        }
-      }
-    }
+                $.each($("input[name='sport']:checked"), function(){
 
-    cboxArray.push(cboxValue);
-  }
+                    favorite.push($(this).val());
 
-  $('input[type="checkbox"]').each(function() {
+                });
 
-    var cboxValue = $(this).val();
-    var cboxChecked = localStorage.getItem(cboxValue) == 'true' ? true : false;
+                alert("My favourite sports are: " + favorite.join(", "));
 
-    // On page load check if any of the checkboxes has previously been selected and mark it as "checked"
-    if (cboxChecked) {
+            });
 
-      $(this).prop('checked', true);
-      itemExistsChecker(cboxValue);
+        });
 
-    }
+    </script>
 
-    // On checkbox change add/remove the vehicle value from the array based on the choice
-    $(this).change(function() {
+    </head>
 
-      localStorage.setItem(cboxValue, $(this).is(':checked'));
+    <body>
 
-      if ($(this).is(':checked')) {
+        <form>
 
-        itemExistsChecker(cboxValue);
+            <h3>Select your favorite sports:</h3>
 
-      } else {
+            <label><input type="checkbox" value="football" name="sport"> Football</label>
 
-        // Delete the vehicle value from the array if its checkbox is unchecked
-        var cboxValueIndex = cboxArray.indexOf(cboxValue);
+            <label><input type="checkbox" value="baseball" name="sport"> Baseball</label>
 
-        if (cboxValueIndex >= 0) {
-          cboxArray.splice( cboxValueIndex, 1 );
-        }
+            <label><input type="checkbox" value="cricket" name="sport"> Cricket</label>
 
-      }
+            <label><input type="checkbox" value="boxing" name="sport"> Boxing</label>
 
-      console.log(cboxArray);
+            <label><input type="checkbox" value="racing" name="sport"> Racing</label>
 
-    });
+            <label><input type="checkbox" value="swimming" name="sport"> Swimming</label>
 
-  });
+            <br>
 
-  console.log(cboxArray);
+            <button type="button">Get Values</button>
 
-})(jQuery);
-</script>
-</body>
-</html>
+        </form>
+
+    </body>
+
+    </html>
+
