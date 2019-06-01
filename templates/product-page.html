@@ -27,8 +27,17 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <h2>Cart</h2>
-                    <div id="ajax_resp">
-                    </div>
+                    <li class="nav-item" role="presentation">
+                        <div class="row d-flex align-items-center" style="border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding-top:10px;padding-bottom:10px;">
+                            <table width="100%">
+                                <tr>
+                                    <td><span class="badge badge-primary badge-pill" style="background-color:#ff0000;">X</span></td>
+                                    <td>مشروب ساخن جميل جدا</td>
+                                    <td><span class="badge badge-primary badge-pill">x12</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
                 </ul>
 
         </div>
@@ -36,7 +45,7 @@
     </nav>
 
 
-    <form action="/check_order" method="post" id="add_to_cart">
+    <form action="/check_order" method="">
     <div class="container main-bg" style="max-width: 100%;">
         <div class="row">
             <div class="col-md-5" style="padding: 0px;">
@@ -70,7 +79,7 @@
                         <div class="col-7 col-md-7 col-xl-7 text-right d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill justify-content-end align-items-stretch" style="padding: 0px;">
                             <p style="font-size: 13px;color: rgb(155,158,160);font-family: Cairo, sans-serif;">{{ addons.name }}<br></p>
                         </div>
-                        <div class="col-1 col-xl-1 text-right"><input name="addons_id" value="{{ addons.id }}" type="checkbox"></div>
+                        <div class="col-1 col-xl-1 text-right"><input name="addons_main" value="{{ addons.name }}" type="radio"></div>
                         {% endfor %}
                     </div>
                 </div> {% endif %}
@@ -89,7 +98,7 @@
                         <div class="col-7 col-md-7 col-xl-7 text-right d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill justify-content-end align-items-stretch" style="padding: 0px;">
                             <p style="font-size: 13px;color: rgb(155,158,160);font-family: Cairo, sans-serif;">{{ addons.name }}<br></p>
                         </div>
-                        <div class="col-1 col-xl-1 text-right"><input id="addons_id" name="addons_id" value="{{ addons.id }}" type="checkbox"></div>
+                        <div class="col-1 col-xl-1 text-right"><input name="addons_optional" value="{{ addons.name }}" type="checkbox"></div>
                         {% endfor %}
                     </div>
                 </div>{% endif %}
@@ -100,8 +109,8 @@
                             <p style="color: rgb(166,166,166);font-family: Cairo, sans-serif;">الكمية</p><input id="quantity" name="quantity" type="number" value="0" min="0" max="100" step="1"/></div>
                     </div>
                 </div>
-                <input type="hidden" id="product_id" name="product_id" value="{{ product_name.name }}"/>
-                <button class="btn btn-outline-link btn-block" id="add-to-cart-button" type="submit" style="background-color: #eb4242;color: rgb(255,255,255);font-family: Cairo, sans-serif;">أضف إلى مشترياتي</button></div>
+                <input type="hidden" id="product_id" name="product_name" value="{{ product_name.name }}"/>
+                <button class="btn btn-outline-link btn-block" id="add-to-cart-button" style="background-color: #eb4242;color: rgb(255,255,255);font-family: Cairo, sans-serif;">أضف إلى مشترياتي</button></div>
             <div class="col-md-7 d-md-flex d-xl-flex justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center d-none d-md-block"
                 style="background-color: #d64747;height: 100vh;background-image: url(../static/assets/img/1.jpg);background-position: center;background-size: cover;background-repeat: no-repeat;">
                 <div>
@@ -121,32 +130,7 @@
     <script src="../static/assets/js/Simple-Slider.js"></script>
             <!-- At the end of <body>, after jQuery and the Bootstrap js -->
     <script src="../static/assets/js/bootstrap-better-nav.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#add_to_cart').on('submit', function(event) {
 
-                    var myCheckboxes = new Array();
-                        $("input:checked").each(function() {
-                           myCheckboxes.push($(this).val());
-                        });
-
-                    $.ajax({
-                        data : {
-                            product_name : $('#product_id').val(),
-                            addons_id : JSON.stringify(myCheckboxes),
-                            quantity : $('#quantity').val()
-                        },
-                        type : 'POST',
-                        url : '{{ url_for('check_order_session') }}'
-                    })
-                    .done(function(resp) {
-                           $('#ajax_resp').html(resp);
-                    });
-
-                    event.preventDefault();
-                });
-              })
-    </script>
 
 
 </form>

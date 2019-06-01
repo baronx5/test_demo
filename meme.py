@@ -55,25 +55,22 @@ def product_page(id):
     return render_template("product-page.html", product_name = results_products ,addons_main = addons_main, addons_optional = addons_optional,results_logo = results_logo)
 
 
-@app.route('/check_order',methods=["post"])
+@app.route('/check_order', methods=['GET', 'POST'])
 def check_order_session():
 
-    if request.method == "POST":
-        product_name = request.form["product_name"]
-        addons_id = request.form["addons_id"]
-        quantity = request.form["quantity"]
+        args = request.args
 
-        return render_template('/ajax_files/cart_items.html', product_name=product_name, addons_id=addons_id, quantity=quantity)
+        if "addons_optional" in args:
+            addons_optional = args.get("addons_optional")
+            print(addons_optional)
+        if "addons_main" in args:
+            addons_main = args.get("addons_main")
+            print(addons_main)
 
+        #        for k, v in args.items():
+        #           print(f"{k}: {v}")
 
-@app.route('/payment', methods=['post','get'])
-def payment():
-
-    if request.method == 'post':
-        check = request.form.getlist('vehicles')
-        print(check[0])
-
-    return
+        return "Query received: ", 200
 
 
 if __name__ == '__main__':
