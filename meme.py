@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for,jsonify
+from flask import Flask, render_template, request, url_for,jsonify,json
 import pymysql.cursors
 app = Flask(__name__)
 
@@ -52,7 +52,36 @@ def product_page(id):
         cursor.execute(sql)
         results_logo = cursor.fetchone()
 
-    return render_template("product-page.html", product_name = results_products ,addons_main = addons_main, addons_optional = addons_optional,results_logo = results_logo)
+        my_result = {"product_name":results_products, "addons_main":addons_main, "addons_optional":addons_optional, "results_logo":results_logo}
+        my_result = json.dumps(my_result)
+
+    return render_template("product-page.html", product_name = results_products ,addons_main = addons_main, addons_optional = addons_optional,results_logo = results_logo, my_result = my_result)
+
+
+@app.route('/test/<string:id>')
+def call_api(id):
+    with dbconn.cursor() as cursor:
+
+        sql = "SELECT * FROM products where id = %s"
+        cursor.execute(sql,id)
+        results_products = cursor.fetchone()
+
+        sql = "SELECT * FROM addons where product_id = %s AND optional LIKE 1"
+        cursor.execute(sql,id)
+        addons_main = cursor.fetchall()
+
+        sql = "SELECT * FROM addons where product_id = %s AND optional LIKE 2"
+        cursor.execute(sql,id)
+        addons_optional = cursor.fetchall()
+
+        sql = "SELECT * FROM settings"
+        cursor.execute(sql)
+        results_logo = cursor.fetchone()
+
+        my_result = {"product_name":results_products, "addons_main":addons_main, "addons_optional":addons_optional, "results_logo":results_logo}
+    return json.dumps(my_result)
+
+
 
 
 @app.route('/check_order', methods=['GET', 'POST'])

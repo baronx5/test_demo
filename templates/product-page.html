@@ -19,6 +19,8 @@
 
 </head>
 
+{{ my_result }}
+
 <body style="background-color: rgb(245,245,245);">
 
 
@@ -28,15 +30,19 @@
                 <ul class="nav navbar-nav">
                     <h2>Cart</h2>
                     <li class="nav-item" role="presentation">
-                        <div class="row d-flex align-items-center" style="border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding-top:10px;padding-bottom:10px;">
-                            <table width="100%">
-                                <tr>
-                                    <td><span class="badge badge-primary badge-pill" style="background-color:#ff0000;">X</span></td>
-                                    <td>مشروب ساخن جميل جدا</td>
-                                    <td><span class="badge badge-primary badge-pill">x12</span></td>
-                                </tr>
-                            </table>
+
+                    <div class="row justify-content-around" style="margin: 0px;">
+                        {% for addons in addons_main %}
+                        <div class="col-3 col-md-3 text-left">
+                            <p class="text-left" style="font-size: 12px;">{{ addons.price }} KWD<br></p>
                         </div>
+                        <div class="col-7 col-md-7 col-xl-7 text-right d-flex flex-column flex-grow-1 flex-shrink-1 flex-fill justify-content-end align-items-stretch" style="padding: 0px;">
+                            <p style="font-size: 13px;color: rgb(155,158,160);font-family: Cairo, sans-serif;">{{ addons.name }}<br></p>
+                        </div>
+                        <div class="col-1 col-xl-1 text-right"><input name="addons_main" value="{{ addons.name }}" type="radio"></div>
+                        {% endfor %}
+                    </div>
+
                     </li>
                 </ul>
 
